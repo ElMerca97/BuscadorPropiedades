@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscador Operativo Uruguay</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>🔎 Buscador de Propiedades y Cuentas</h2>
+
+<input id="searchInput" placeholder="Busque por nombre, técnico, cuenta, código..." />
+
+<table>
+  <thead>
+    <tr>
+      <th>Categoría</th>
+      <th>Información / Detalle</th>
+      <th>Código / Número</th>
+    </tr>
+  </thead>
+  <tbody id="results"></tbody>
+</table>
+
+<!-- 🔥 IMPORTANTE: usar módulos -->
+<script type="module">
+  import data from './data.js';
+  window.data = data; // lo hacemos global para app.js
+</script>
+
+<script src="app.js"></script>
+
+</body>
+</html>
