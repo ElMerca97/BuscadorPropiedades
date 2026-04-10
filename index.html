@@ -1,35 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Buscador Operativo Uruguay</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h2>🔎 Buscador de Propiedades y Cuentas</h2>
+  <div class="theme-switch-wrapper">
+    <button id="themeToggle">
+      <span class="icon-animate">☀️</span>
+    </button>
+  </div>
 
-<input id="searchInput" placeholder="Busque por nombre, técnico, cuenta, código..." />
+  <div class="header-section">
+    <div class="search-container">
+      <h2>🔎 Buscador Operativo</h2>
+      <input id="searchInput" class="search-box" placeholder="Escriba para buscar propiedades, cuentas o categorías..."
+        autocomplete="off">
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Categoría</th>
-      <th>Información / Detalle</th>
-      <th>Código / Número</th>
-    </tr>
-  </thead>
-  <tbody id="results"></tbody>
-</table>
+  <div class="results-container" id="resultsContainer">
+  </div>
 
-<!-- 🔥 IMPORTANTE: usar módulos -->
-<script type="module">
-  import data from './data.js';
-  window.data = data; // lo hacemos global para app.js
-</script>
+  <script type="module">
+    import data from './data.js';
+    window.data = data; 
+  </script>
 
-<script src="app.js"></script>
+  <script src="app.js"></script>
 
 </body>
+
 </html>

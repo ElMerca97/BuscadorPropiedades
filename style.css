@@ -1,32 +1,208 @@
+:root {
+    /* Modo Claro */
+    --bg-color: #f4f7f6;
+    --text-color: #2c3e50;
+    --card-bg: #ffffff;
+    --border-color: #dddddd;
+    --table-header: #3498db;
+    --table-row-hover: #f1f1f1;
+    --input-bg: #ffffff;
+    --mark-bg: #ffeb3b;
+}
+
+[data-theme="dark"] {
+    /* Modo Oscuro */
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --card-bg: #2d2d2d;
+    --border-color: #444444;
+    --table-header: #1f618d;
+    --table-row-hover: #3d3d3d;
+    --input-bg: #333333;
+    --mark-bg: #d35400; /* Naranja oscuro para resaltar mejor en negro */
+}
+
 body {
-  font-family: Arial;
-  padding: 20px;
-  background: #f5f5f5;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+    margin: 0;
 }
 
-input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
-  font-size: 16px;
+/* Buscador */
+.search-box {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-sizing: border-box; /* Importante para que el padding no ensanche el input */
 }
 
+/* Tablas Dinámicas */
 table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
 }
 
 th, td {
-  border: 1px solid #ddd;
-  padding: 10px;
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    text-align: left;
 }
 
 th {
-  background: #222;
-  color: white;
+    background-color: var(--table-header);
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.85em;
 }
 
 tr:hover {
-  background: #f1f1f1;
+    background-color: var(--table-row-hover);
+}
+
+/* Resaltado de búsqueda */
+mark {
+    background-color: var(--mark-bg);
+    color: white;
+    padding: 2px;
+    border-radius: 2px;
+}
+
+/* Estilos del Modal (Corregido) */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 999;
+}
+
+#editModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-height: 80vh;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 25px;
+    border-radius: 12px;
+    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+textarea {
+    width: 100%;
+    height: 300px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    font-family: monospace;
+    box-sizing: border-box;
+}
+
+.import-bar {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px dashed var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Transición suave para todos los elementos */
+body, .search-box, table, th, td, #editModal {
+    transition: background-color 0.8s ease, color 0.8s ease, border-color 0.8s ease;
+}
+
+/* Contenedor del Botón / Sol-Luna */
+#themeToggle {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    border-radius: 50px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 20px;
+    overflow: hidden;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Animación de entrada y salida vertical */
+.icon-animate {
+    transition: transform 0.4s ease-in, opacity 0.3s;
+}
+
+.icon-exit {
+    transform: translateY(40px);
+    opacity: 0;
+}
+
+.icon-enter {
+    transform: translateY(-40px);
+    opacity: 0;
+}
+
+/* Contenedor del interruptor flotante a la derecha */
+.theme-switch-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+}
+
+#themeToggle {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 50%; /* Lo hacemos circular para que parezca un pequeño planeta */
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    overflow: hidden; /* CRUCIAL: Esto hace que el sol/luna "desaparezcan" al bajar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#themeToggle:hover {
+    transform: scale(1.1);
+}
+
+/* Animación del ícono */
+.icon-animate {
+    font-size: 24px;
+    display: inline-block;
+    transition: transform 0.6s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 0.4s;
+}
+
+/* Estado cuando se "pierde" hacia abajo */
+.icon-fall {
+    transform: translateY(60px); /* Baja lo suficiente para salir del círculo */
+    opacity: 0;
+}
+
+/* Estado cuando aparece desde arriba */
+.icon-source {
+    transform: translateY(-60px);
+    opacity: 0;
 }
